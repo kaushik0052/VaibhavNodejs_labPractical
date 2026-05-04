@@ -1,0 +1,83 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h1 class="h4 mb-3">New Workout</h1>
+          <% if (error) { %>
+          <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+          <form class="needs-validation" novalidate method="POST" action="/workout">
+            <div class="mb-3">
+              <label for="workoutType" class="form-label">Workout Type</label>
+              <input
+                type="text"
+                class="form-control"
+                id="workoutType"
+                name="workoutType"
+                value="<%= workout.workoutType || '' %>"
+                required
+              />
+              <div class="invalid-feedback">Workout type is required.</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="duration" class="form-label">Duration (minutes)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="duration"
+                  name="duration"
+                  min="1"
+                  value="<%= workout.duration || '' %>"
+                  required
+                />
+                <div class="invalid-feedback">Duration is required and must be positive.</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="caloriesBurned" class="form-label">Calories Burned</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="caloriesBurned"
+                  name="caloriesBurned"
+                  min="0"
+                  value="<%= workout.caloriesBurned || '' %>"
+                  required
+                />
+                <div class="invalid-feedback">Calories burned is required.</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="workoutDate" class="form-label">Workout Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="workoutDate"
+                  name="workoutDate"
+                  value="<%= workout.workoutDate ? (workout.workoutDate.toISOString ? workout.workoutDate.toISOString().split('T')[0] : workout.workoutDate) : '' %>"
+                  required
+                />
+                <div class="invalid-feedback">Date is required.</div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="notes" class="form-label">Notes</label>
+              <textarea
+                class="form-control"
+                id="notes"
+                name="notes"
+                rows="4"
+                required
+              ><%= workout.notes || '' %></textarea>
+              <div class="invalid-feedback">Notes are required.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Workout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

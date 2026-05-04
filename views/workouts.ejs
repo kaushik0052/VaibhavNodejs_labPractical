@@ -1,0 +1,43 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3">My Workouts</h1>
+      <p class="text-muted">A complete workout log for your fitness journey.</p>
+    </div>
+    <a class="btn btn-success" href="/workout/new">Add Workout</a>
+  </div>
+  <% if (workouts.length === 0) { %>
+  <div class="alert alert-info">No workouts yet. Start by adding a new workout.</div>
+  <% } else { %>
+  <div class="table-responsive shadow-sm rounded bg-white">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Duration (min)</th>
+          <th>Calories</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% workouts.forEach((workout) => { %>
+        <tr>
+          <td><%= workout.workoutType %></td>
+          <td><%= workout.workoutDate.toISOString().split('T')[0] %></td>
+          <td><%= workout.duration %></td>
+          <td><%= workout.caloriesBurned %></td>
+          <td>
+            <a class="btn btn-sm btn-outline-primary" href="/workouts/<%= workout.id %>">View</a>
+            <a class="btn btn-sm btn-outline-secondary" href="/workouts/<%= workout.id %>/edit">Edit</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
+</div>
+<%- include('partials/footer') %>
