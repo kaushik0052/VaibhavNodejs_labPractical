@@ -9,7 +9,6 @@ function ensureAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
-
 router.use(ensureAuthenticated);
 
 router.get('/workouts', async (req, res) => {
